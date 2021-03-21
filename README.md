@@ -33,7 +33,7 @@ We have come up with the following algorithms of reversing the task:
 
 The easiest way to replicate our work would be to run the [reverse_voice_filter.ipynb](https://github.com/palette-knife25/reverse-voice-filter/blob/main/reverse_voice_filter.ipynb).
 
-## Envionment Requirements
+## Environment Requirements
 
 Our project was executed on Google Colab.
 It is important to note that our experimental setup requires usage of **Tesla P100**,
