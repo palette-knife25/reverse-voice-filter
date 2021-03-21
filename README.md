@@ -31,6 +31,8 @@ We have come up with the following algorithms of reversing the task:
 1. Keeping all the system as is, but reversing the effect of the soft mask at the inference stage.
 2. Redesigning the dataset, leaving the noise as the target.
 
+The easiest way to replicate our work would be to run the [reverse_voice_filter.ipynb](https://github.com/palette-knife25/reverse-voice-filter/blob/main/reverse_voice_filter.ipynb).
+
 ## Envionment Requirements
 
 Our project was executed on Google Colab.
