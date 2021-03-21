@@ -99,7 +99,7 @@ Check your GPU type using
 
     In order to boost training speed, perform STFT for each files before training by:
     ```bash
-    python generator.py -c [config yaml] -d [data directory] -o [output directory] -p [processes to run] --reverse_data [False/True generate reverse data]
+    python generator.py -c [config yaml] -d [data directory] -o [output directory] -p [processes to run] --reverse_data [False/True generate reverse data] --train_size [int nuber of train samples] --test_size [int nuber of test samples] --only_dev [True/False you are using only development set for training]
     ```
 
 

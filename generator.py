@@ -101,6 +101,10 @@ if __name__ == '__main__':
                         help='generate reverse data (target - noise). default: False')
     parser.add_argument('--vad', type=int, default=0,
                         help='apply vad to wav file. yes(1) or no(0, default)')
+    parser.add_argument('--train_size', type=int, default=40,
+                        help='how many samples in train set')
+    parser.add_argument('--test_size', type=int, default=20,
+                        help='how many samples in test set')
     parser.add_argument('--only_dev', type=bool, default=False,
                         help='are you using only dev subset? default: False')
     args = parser.parse_args()
@@ -160,10 +164,10 @@ if __name__ == '__main__':
         s2 = random.choice(spk2)
         mix(hp, args, audio, num, s1_dvec, s1_target, s2, train=False)
 
-    arr = list(range(len(train_spk)))
+    arr = list(range(args.train_size))
     with Pool(cpu_num) as p:
         r = list(tqdm.tqdm(p.imap(train_wrapper, arr), total=len(arr)))
 
-    arr = list(range(len(test_spk)))
+    arr = list(range(args.test_size))
     with Pool(cpu_num) as p:
         r = list(tqdm.tqdm(p.imap(test_wrapper, arr), total=len(arr)))
