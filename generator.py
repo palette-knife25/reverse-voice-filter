@@ -101,6 +101,8 @@ if __name__ == '__main__':
                         help='generate reverse data (target - noise). default: False')
     parser.add_argument('--vad', type=int, default=0,
                         help='apply vad to wav file. yes(1) or no(0, default)')
+    parser.add_argument('--only_dev', type=bool, default=False,
+                        help='are you using only dev subset? default: False')
     args = parser.parse_args()
 
     os.makedirs(args.out_dir, exist_ok=True)
@@ -124,6 +126,10 @@ if __name__ == '__main__':
                         # + \
                         #[x for x in glob.glob(os.path.join(args.libri_dir, 'train-other-500', '*'))
                         #    if os.path.isdir(x)]
+        if args.only_dev:
+            train_folders = train_folders + \
+                            [x for x in glob.glob(os.path.join(args.libri_dir, 'dev-clean', '*'))
+                             if os.path.isdir(x)]
         test_folders = [x for x in glob.glob(os.path.join(args.libri_dir, 'dev-clean', '*'))]
 
     elif args.voxceleb_dir is not None:

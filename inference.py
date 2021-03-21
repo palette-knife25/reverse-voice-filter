@@ -67,7 +67,7 @@ if __name__ == '__main__':
                         help='directory of output')
     parser.add_argument('--mask', type=str, required=True,
                         help='how to apply mask: "org" - spec*mask; "inv_div" - factor*spec/mask; "inv_sub" - spec*(1-mask)/factor')
-    parser.add_argument('--factor', type=float, required=True, default=None,
+    parser.add_argument('--factor', type=float, default=0.7,
                         help="factor for mask application; if --mask org - None, else - preferably 0.7")
 
     args = parser.parse_args()
