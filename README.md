@@ -11,7 +11,7 @@ The authors are:
 
 ## Description
 
-In this project we have set two goals for ourselves:
+In this project we have set three goals for ourselves:
 
 - Replicate the paper by Google AI's:
 [VoiceFilter: Targeted Voice Separation by Speaker-Conditioned Spectrogram Masking](https://arxiv.org/abs/1810.04826).
@@ -31,6 +31,19 @@ We have come up with the following algorithms of reversing the task:
 1. Keeping all the system as is, but reversing the effect of the soft mask at the inference stage.
 2. Redesigning the dataset, leaving the noise as the target.
 
+## Envionment Requirements
+
+Our project was executed on Google Colab.
+It is important to note that our experimental setup requires usage of **Tesla P100**,
+because all other types of Colab GPUs yielded a "CUDNN_STATUS_EXECUTION_FAILED" error.
+
+Check your GPU type using
+    ```
+    !nvidia-smi
+    ``` command. If it does not comply to the requirements, repeat these steps until you get a Tesla P100:
+    
+1. Runtime > Factory Reset Runtime
+2. ```!nvidia-smi```
 
 ## Dependencies
 
@@ -115,7 +128,8 @@ We have come up with the following algorithms of reversing the task:
 1. View tensorboardX
 
     ```bash
-    tensorboard --logdir ./logs
+    %load_ext tensorboard
+    %tensorboard --logdir ./dev_set_model/
     ```
     
     ![](./assets/tensorboard.png)
@@ -134,7 +148,52 @@ python inference.py -c [config yaml] -e [path of embedder pt file] --checkpoint_
 
 ## Results
 
-TBA
+### Replication
+
+Spectrogram of a **mixed** audio:
+![](./assets/orig-mixed-spec.png)
+
+Spectrogram of a **target clean** audio:
+![](./assets/orig-target-spec.png)
+
+Spectrogram of a **result** audio:
+![](./assets/orig-res-spec.png)
+
+### Reversing the effect of the soft mask at the inference stage
+
+Spectrogram of a **mixed** audio:
+![](./assets/orig-mixed-spec.png)
+
+Spectrogram of a **target clean** audio:
+![](./assets/orig-target-spec.png)
+
+In the first case the noise was extracted by applying the soft mask in the following manner:
+
+_result audio = mixed spectrogram * (1 - mask) / 0.7_, where 0.7 is a division factor that makes the resulting audio louder.
+
+Spectrogram of a **result** audio (1st case):
+![](./assets/rev-(1-m):0.7-res-spec.png)
+
+In the second case the noise was extracted by applying the soft mask in the following manner:
+
+_result audio = 0.7 * mixed spectrogram / mask_, where 0.7 is a multiplication factor that makes the resulting audio quiter.
+
+Spectrogram of a **result** audio (2nd case):
+![](./assets/rev-(0.7:mask)-res-spec.png)
+
+### Redesigning the dataset, leaving the noise as the target.
+
+In this case we have redesigned the dataset generation: now the noise is considered to be the target value,
+instead of the speaker's voice.
+
+Spectrogram of a **mixed** audio:
+![](./assets/rev-data-mixed-spec.png)
+
+Spectrogram of a **target noise** audio:
+![](./assets/rev-data-target-spec.png)
+
+Spectrogram of a **result** audio:
+![](./assets/rev-data-res-spec.png)
 
 ## Original Code
 
