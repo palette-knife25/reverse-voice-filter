@@ -36,13 +36,13 @@ The easiest way to replicate our work would be to run the [reverse_voice_filter.
 ## Environment Requirements
 
 Our project was executed on Google Colab.
-It is important to note that our experimental setup requires usage of **Tesla P100**,
+It is important to note that our experimental setup requires usage of **Tesla P100** or **Tesla K80**,
 because all other types of Colab GPUs yielded a "CUDNN_STATUS_EXECUTION_FAILED" error.
 
 Check your GPU type using
     ```
     !nvidia-smi
-    ``` command. If it does not comply to the requirements, repeat these steps until you get a Tesla P100:
+    ``` command. If it does not comply to the requirements, repeat these steps until you get a Tesla P100/K80:
     
 1. Runtime > Factory Reset Runtime
 2. ```!nvidia-smi```
