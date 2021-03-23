@@ -115,8 +115,6 @@ Check your GPU type using
     Tests are done with window 80 / hop 40 and have shown equal error rate about 1%.
     Data used for test were selected from first 8 speakers of [VoxCeleb1](http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html) test dataset, where 10 utterances per each speakers are randomly selected.
     
-    **Update**: Evaluation on VoxCeleb1 selected pair showed 7.4% EER.
-    
     The model can be downloaded at [this GDrive link](https://drive.google.com/file/d/1YFmhmUok-W76JkrfA0fzQt3c-ZsfiwfL/view?usp=sharing).
 
 1. Run
@@ -196,6 +194,17 @@ Spectrogram of a **target noise** audio:
 
 Spectrogram of a **result** audio:
 ![](./assets/rev-data-res-spec.png)
+
+## Evaluate on a speech recognition downstream task
+
+In order to compare how the speech recognition improved after passing a mixed audio through the Voice filter
+you can run [replication_results_analysis.ipynb](https://github.com/palette-knife25/reverse-voice-filter/blob/main/replication_results_analysis.ipynb).
+
+This experiment also requires two more libraries:
+```
+pip install SpeechRecognition
+pip install SoundFile
+```
 
 ## Original Code
 
